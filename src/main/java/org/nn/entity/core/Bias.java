@@ -2,15 +2,15 @@ package org.nn.entity.core;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class Bias {
     private double value;
-    private List<Double> gradient = new ArrayList<>();
+    private double gradient;
+    private double lastGradient;
 
     public void addGradient(double value) {
-        gradient.add(value);
+        gradient += value;
+        lastGradient = value;
     }
 }

@@ -2,7 +2,6 @@ package org.nn.entity.core;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -11,9 +10,9 @@ public class Neuron {
     private Bias bias;
     private double value;
     private double z;
-    private List<Double> gradient = new ArrayList<>();
+    private double gradient;
 
     public void addGradient(double value) {
-        gradient.add(value);
+        gradient += value;
     }
 }

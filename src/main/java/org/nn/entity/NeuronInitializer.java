@@ -7,6 +7,11 @@ public class NeuronInitializer {
     private final BiasInitializer biasInitializer;
     private final WeightInitializer weightInitializer;
 
+    public static final double DEFAULT_BIAS_MIN = -100;
+    public static final double DEFAULT_BIAS_MAX = 100;
+    public static final double DEFAULT_WEIGHT_MIN = -100;
+    public static final double DEFAULT_WEIGHT_MAX = 100;
+
     public NeuronInitializer(BiasInitializer biasInitializer, WeightInitializer weightInitializer) {
         this.biasInitializer = biasInitializer;
         this.weightInitializer = weightInitializer;
@@ -18,12 +23,12 @@ public class NeuronInitializer {
     }
 
     public NeuronInitializer() {
-        this.biasInitializer = new BiasInitializer(-100, 100);
-        this.weightInitializer = new WeightInitializer(-100,100);
+        this.biasInitializer = new BiasInitializer(DEFAULT_BIAS_MIN, DEFAULT_BIAS_MAX);
+        this.weightInitializer = new WeightInitializer(DEFAULT_WEIGHT_MIN,DEFAULT_WEIGHT_MAX);
     }
 
     public static NeuronInitializer getDefault() {
-        return new NeuronInitializer(-100, 100, -100, 100);
+        return new NeuronInitializer();
     }
 
     public Neuron getWithRandomWeightBiases(int nPrevCount) {

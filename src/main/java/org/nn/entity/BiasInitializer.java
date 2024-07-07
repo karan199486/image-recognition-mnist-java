@@ -1,14 +1,16 @@
 package org.nn.entity;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.nn.entity.core.Bias;
 import org.nn.util.Util;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class BiasInitializer {
 
-    private final double valueFrom;
-    private final double valueTo;
+    private double valueFrom;
+    private double valueTo;
 
     public Bias getRandom() {
         var bias = new Bias();

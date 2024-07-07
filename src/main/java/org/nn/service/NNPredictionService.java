@@ -54,11 +54,11 @@ public class NNPredictionService {
                 .stream().mapToDouble(Neuron::getValue).toArray();
     }
 
-    public double testAccuracy(MnistMatrix[] testDataArr) {
+    public double testAccuracy(ImageData[] testDataArr) {
         var total = testDataArr.length;
         var success = 0;
         for(var testData : testDataArr) {
-            double[] actualOutput = predictPrimitive(testData.dataLinear);
+            double[] actualOutput = predictPrimitive(testData.getDataArr());
             int maxI = 0;
             double maxValue = actualOutput[maxI];
             for(var i = 1; i < actualOutput.length; i++) {

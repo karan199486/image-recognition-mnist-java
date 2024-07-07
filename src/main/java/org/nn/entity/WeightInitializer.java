@@ -1,17 +1,19 @@
 package org.nn.entity;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.nn.entity.core.Weight;
 import org.nn.util.Util;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class WeightInitializer {
 
-    private final double valueFrom;
-    private final double valueTo;
+    private double valueFrom;
+    private double valueTo;
 
     public Weight getRandom() {
         var w = Weight.builder();
