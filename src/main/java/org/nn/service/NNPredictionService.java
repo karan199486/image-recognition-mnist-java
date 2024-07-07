@@ -54,7 +54,7 @@ public class NNPredictionService {
                 .stream().mapToDouble(Neuron::getValue).toArray();
     }
 
-    public void testAccuracy(int epoch, MnistMatrix[] testDataArr) {
+    public double testAccuracy(MnistMatrix[] testDataArr) {
         var total = testDataArr.length;
         var success = 0;
         for(var testData : testDataArr) {
@@ -72,7 +72,6 @@ public class NNPredictionService {
                 success++;
             }
         }
-
-        System.out.println("Test result after "+epoch+" iteration : "+success+"/"+total);
+        return (100 * success) / (double)total;
     }
 }

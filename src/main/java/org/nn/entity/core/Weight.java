@@ -16,10 +16,9 @@ public class Weight {
 //    private int fromIndex;
 //    private int toIndex;
     private double value;
-    private List<Double> gradient;
+    private double gradient;
 
     public void addGradient(double value) {
-        if(gradient == null) gradient = new ArrayList<>();
-        gradient.add(value);
+        gradient += value;
     }
 }

@@ -4,6 +4,7 @@ import org.nn.entity.MnistMatrix;
 import org.nn.entity.core.*;
 import org.nn.util.Util;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -27,11 +28,10 @@ public class NNLearningService {
     }
 
     public void startLearn(MnistMatrix[] mnistTrainData, MnistMatrix[] mnistTestData) {
-        predictionService.testAccuracy(-1, mnistTestData);
         //stochastic gradient descent
         IntStream.rangeClosed(1, epoch).forEach(i -> {
 
-            System.out.println("Started epoch " + i);
+            var start = System.currentTimeMillis();
 
             int batches = Math.ceilDiv(mnistTrainData.length, batchSize);
 
@@ -48,7 +48,10 @@ public class NNLearningService {
                 applyAvgGradientOverParameters();
                 startI = endI;
             }
-            predictionService.testAccuracy(i, mnistTestData);
+            double successPercent = predictionService.testAccuracy(mnistTestData);
+
+            System.out.println("Test result after "+i+" iteration : "+successPercent + "% , total duration : "
+                    + Util.printDuration(Duration.ofMillis(System.currentTimeMillis() - start)));
         });
     }
 
@@ -123,9 +126,9 @@ public class NNLearningService {
                 bias.setGradient(new ArrayList<>()); //reset
 
                 neuron.getWeights().forEach(weight -> {
-                    var avgWL = weight.getGradient().stream().mapToDouble(d->d).average().getAsDouble();
+                    var avgWL = weight.getGradient() / batchSize;
                     weight.setValue(weight.getValue() - learningRate * avgWL);
-                    weight.setGradient(new ArrayList<>()); //reset
+                    weight.setGradient(0); //reset
                 });
             });
         });

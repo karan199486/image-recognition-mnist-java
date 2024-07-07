@@ -1,5 +1,6 @@
 package org.nn.util;
 
+import java.time.Duration;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -61,5 +62,12 @@ public class Util {
     public static double getSigmoidDerivative(double x) {
         var sig = Util.calculateSigmoid(x);
         return sig * (1-sig);
+    }
+
+    public static String printDuration(Duration duration) {
+        return duration.toString()
+                .substring(2)
+                .replaceAll("(\\d[HMS])(?!$)", "$1 ")
+                .toLowerCase();
     }
 }

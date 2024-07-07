@@ -69,6 +69,7 @@ public class Main {
         });
 
         NNPredictionService nnPredictionService = new NNPredictionService(nn);
-        nnPredictionService.testAccuracy(1, testDataArr);
+        double successPercent = nnPredictionService.testAccuracy(testDataArr);
+        System.out.println("Test result : "+ successPercent+"% success rate");
     }
 }
